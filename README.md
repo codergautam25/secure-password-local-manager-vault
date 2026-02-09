@@ -71,4 +71,5 @@ Want to host this safely? Read the **[Deployment Guide](deployment_guide.md)** f
 -   **Backend**: Located in `backend/`.
 
 ## License
-MIT License.
+All Rights Reserved.
+This project is proprietary and confidential. Unauthorized copying, distribution, or use is strictly prohibited.
