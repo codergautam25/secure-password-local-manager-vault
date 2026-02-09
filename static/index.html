@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Password Manager</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <h1>Password Vault</h1>
+            <div id="status-indicator">Locked</div>
+            <button id="lock-btn" style="display:none;" onclick="lockVault()">Lock Vault</button>
+        </header>
+
+        <main>
+            <!-- Login / Init Section -->
+            <section id="auth-section">
+                <h2 id="auth-title">Unlock Vault</h2>
+                <form id="auth-form">
+                    <input type="password" id="master-password" placeholder="Enter Master Password" required>
+                    <button type="submit" id="auth-btn">Unlock</button>
+                </form>
+                <p id="auth-message"></p>
+            </section>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" style="display:none;">
+                <div class="controls">
+                    <input type="text" id="search-box" placeholder="Search passwords..." onkeyup="filterPasswords()">
+                    <button onclick="showAddModal()">+ Add Password</button>
+                    <button onclick="showImportModal()" style="background:#555;">Import CSV</button>
+                    <button onclick="showChangePasswordModal()" style="background:#555;">Change Master Password</button>
+                </div>
+
+                <table id="password-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Attachments</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="password-list">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <!-- Add Password Modal -->
+        <div id="add-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeAddModal()">&times;</span>
+                <h2>Add New Password</h2>
+                <form id="add-form">
+                    <input type="text" id="new-service" placeholder="Service (e.g. Gmail)" required>
+                    <input type="text" id="new-username" placeholder="Username" required>
+                    <div class="password-input-group">
+                        <input type="password" id="new-password" placeholder="Password" required>
+                        <button type="button" onclick="generateRandomPassword()">Generate</button>
+                    </div>
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Change Password Modal -->
+        <div id="change-pw-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeChangePasswordModal()">&times;</span>
+                <h2>Change Master Password</h2>
+                <form id="change-pw-form">
+                    <input type="password" id="current-pw" placeholder="Current Master Password" required>
+                    <input type="password" id="new-pw" placeholder="New Master Password" required
+                        style="margin-top:10px;">
+                    <input type="password" id="confirm-new-pw" placeholder="Confirm New Password" required
+                        style="margin-top:10px;">
+                    <button type="submit" style="margin-top:15px; width:100%;">Change Password</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Import CSV Modal -->
+        <div id="import-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeImportModal()">&times;</span>
+                <h2>Import Passwords (CSV)</h2>
+                <p style="font-size:0.9em; color:#ccc; margin-bottom:15px;" id="import-desc">Supports Chrome, Firefox,
+                    Safari exports.</p>
+                <form id="import-form">
+                    <input type="file" id="import-file" accept=".csv" required
+                        style="color:var(--text-color); margin-bottom:15px;">
+                    <button type="submit" style="margin-top:15px; width:100%;">Upload & Import</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Attachments Modal -->
+        <div id="attachments-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeAttachmentsModal()">&times;</span>
+                <h2 id="attach-title">Manage Attachments</h2>
+                <div id="attachment-list" style="margin-bottom:20px;">
+                    <!-- Populated by JS -->
+                    <p style="color:#ccc">No attachments.</p>
+                </div>
+
+                <h3 style="font-size:1em; margin-bottom:10px;">Upload New File</h3>
+                <form id="upload-attachment-form">
+                    <input type="hidden" id="attach-entry-id">
+                    <input type="file" id="attachment-file" required
+                        style="color:var(--text-color); margin-bottom:10px;">
+                    <button type="submit" style="width:100%; font-size:0.9em;">Encrypt & Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+
+</html>
