@@ -2,7 +2,7 @@
 
 A robust, local-first password manager built with **Python (FastAPI)** and **Vanilla JavaScript**. Designed with a "Security First" mindset, featuring military-grade encryption, anti-brute-force protections, and a modern mobile-responsive UI.
 
-![Dashboard Preview](/Users/gautam/.gemini/antigravity/brain/92ec5e13-e7c9-43c1-a3ed-c9dc08c84097/dashboard_page_1770648024961.png)
+![Dashboard Preview](static/dashboard_preview.png)
 
 ## Features
 
